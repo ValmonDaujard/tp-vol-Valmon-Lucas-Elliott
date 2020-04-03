@@ -1,28 +1,44 @@
 package tp.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+
+@Entity
 public class Depart {
-	private Vol vol;
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "aeroport_id")
 	private Aeroport aeroport;
+	
+	@Column
+	@NotEmpty
 	private Date dateDepart;
+	
+	@OneToOne(mappedBy = "depart")
+	private Vol vol;
 
 	public Depart() {
 		super();
 	}
 
-	public Depart(Vol vol) {
+
+	public Depart(@NotEmpty Date dateDepart) {
 		super();
-		this.vol = vol;
+		this.dateDepart = dateDepart;
 	}
 
-	public Vol getVol() {
-		return vol;
-	}
-
-	public void setVol(Vol vol) {
-		this.vol = vol;
-	}
 
 	public Aeroport getAeroport() {
 		return aeroport;

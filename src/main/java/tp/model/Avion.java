@@ -1,10 +1,45 @@
 package tp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
+@Entity
 public class Avion {
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Version
+	private int version;
+	
+	@Column
 	private String modele;
-	private ArrayList<Vol> vols = new ArrayList<Vol>();
+	
+	@OneToMany(mappedBy = "avion")
+	private List<Vol> vols = new ArrayList<Vol>();
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
 	public Avion() {
 		super();
@@ -23,11 +58,11 @@ public class Avion {
 		this.modele = modele;
 	}
 
-	public ArrayList<Vol> getVols() {
+	public List<Vol> getVols() {
 		return vols;
 	}
 
-	public void setVols(ArrayList<Vol> vols) {
+	public void setVols(List<Vol> vols) {
 		this.vols = vols;
 	}
 	
@@ -39,5 +74,7 @@ public class Avion {
 	public String toString() {
 		return "Avion [modele=" + modele + "]";
 	}
+	
+	
 
 }

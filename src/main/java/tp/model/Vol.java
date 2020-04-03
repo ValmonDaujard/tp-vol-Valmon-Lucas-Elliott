@@ -1,16 +1,46 @@
 package tp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@Entity
 public class Vol {
-
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Version
+	private int version;
+	
+	@Column
 	private String numeroDeVol;
+	
+	@Column
 	private Boolean ouvert;
+	
+	@OneToOne
 	private Depart depart;
+	@OneToOne
 	private Arrivee arrivee;
+	
+	@ManyToOne
 	private Avion avion;
+	
+	@ManyToOne
 	private Compagnie compagnie;
-	private ArrayList<Trajet> trajets = new ArrayList<Trajet>();
+	
+	@Transient
+	private List<Trajet> trajets = new ArrayList<Trajet>();
+	
+	
 
 	public Vol() {
 		super();
@@ -69,11 +99,11 @@ public class Vol {
 		this.compagnie = compagnie;
 	}
 
-	public ArrayList<Trajet> getTrajets() {
+	public List<Trajet> getTrajets() {
 		return trajets;
 	}
 
-	public void setTrajets(ArrayList<Trajet> trajets) {
+	public void setTrajets(List<Trajet> trajets) {
 		this.trajets = trajets;
 	}
 

@@ -3,18 +3,34 @@ package tp;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import tp.model.persistence.IAeroportDao;
+import tp.model.persistence.IArriveeDao;
+import tp.model.persistence.IAvionDao;
+import tp.model.persistence.ICompagnieDao;
+import tp.model.persistence.IDepartDao;
+import tp.model.persistence.IVilleDao;
+import tp.model.persistence.IVolDao;
+import tp.model.persistence.jpa.AeroportDaoJpa;
+import tp.model.persistence.jpa.ArriveeDaoJpa;
+import tp.model.persistence.jpa.AvionDaoJpa;
+import tp.model.persistence.jpa.CompagnieDaoJpa;
+import tp.model.persistence.jpa.DepartDaoJpa;
+import tp.model.persistence.jpa.VilleDaoJpa;
+import tp.model.persistence.jpa.VolDaoJpa;
+
 public class Application {
 	private static Application instance = null;
 
 	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("tp");
-
-//	private final IEvaluationDao evaluationDao =new EvaluationDaoJpa();
-//	private final IFiliereDao filiereDao = new FiliereDaoJpa();
-//	private final IFormateurDao formateurDao = new FormateurDaoJpa();
-//	private final IMatiereDao matiereDao = new MatiereDaoJpa();
-//	private final ISalleDao salleDao = new SalleDaoJpa();
-//	private final IStagiaireDao stagiaireDao = new StagiaireDaoJpa();
-//	private final IUEDao ueDao = new UEDaoJpa();
+	
+	private final IVilleDao villeDao =new VilleDaoJpa();
+	private final IAeroportDao aeroportDao =new AeroportDaoJpa();
+	private final IAvionDao avionDao =new AvionDaoJpa();
+	private final IArriveeDao arriveeDao =new ArriveeDaoJpa();
+	private final IDepartDao departDao =new DepartDaoJpa();
+	private final IVolDao volDao =new VolDaoJpa();
+	private final ICompagnieDao compagnieDao =new CompagnieDaoJpa();
+	
 
 	private Application() {
 	}
@@ -31,32 +47,32 @@ public class Application {
 		return emf;
 	}
 
-//	public IEvaluationDao getEvaluationDao() {
-//		return evaluationDao;
-//	}
-//
-//	public IFiliereDao getFiliereDao() {
-//		return filiereDao;
-//	}
-//
-//	public IFormateurDao getFormateurDao() {
-//		return formateurDao;
-//	}
-//
-//	public IMatiereDao getMatiereDao() {
-//		return matiereDao;
-//	}
-//
-//	public ISalleDao getSalleDao() {
-//		return salleDao;
-//	}
-//
-//	public IStagiaireDao getStagiaireDao() {
-//		return stagiaireDao;
-//	}
-//
-//	public IUEDao getUeDao() {
-//		return ueDao;
-//	}
+	public IVilleDao getVilleDao() {
+		return villeDao;
+	}
+
+	public IAeroportDao getAeroportDao() {
+		return aeroportDao;
+	}
+
+	public IAvionDao getAvionDao() {
+		return avionDao;
+	}
+
+	public IArriveeDao getArriveeDao() {
+		return arriveeDao;
+	}
+
+	public IDepartDao getDepartDao() {
+		return departDao;
+	}
+
+	public IVolDao getVolDao() {
+		return volDao;
+	}
+
+	public ICompagnieDao getCompagnieDao() {
+		return compagnieDao;
+	}
 
 }
