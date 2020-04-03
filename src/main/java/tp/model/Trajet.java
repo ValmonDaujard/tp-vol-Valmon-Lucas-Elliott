@@ -6,9 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 
 @Entity
@@ -20,7 +19,7 @@ public class Trajet {
 	private int version;
 	@OneToOne(mappedBy = "trajet")
 	private Reservation reservation;
-	@Transient
+	@ManyToMany(mappedBy = "trajets")
 	private List<Vol> vols = new ArrayList<Vol>();
 
 	public Trajet() {

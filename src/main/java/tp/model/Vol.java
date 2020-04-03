@@ -7,9 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 @Entity
@@ -37,7 +41,12 @@ public class Vol {
 	@ManyToOne
 	private Compagnie compagnie;
 	
-	@Transient
+	@ManyToMany
+	@JoinTable(
+			name = "vol_trajet",
+			uniqueConstraints=@UniqueConstraint(columnNames = { "vol_id", "trajet_id" }),
+			joinColumns = @JoinColumn(name="vol_id", referencedColumnName = "id"), 
+			inverseJoinColumns = @JoinColumn(name="trajet_id", referencedColumnName = "id"))
 	private List<Trajet> trajets = new ArrayList<Trajet>();
 	
 	
@@ -106,6 +115,12 @@ public class Vol {
 	public void setTrajets(List<Trajet> trajets) {
 		this.trajets = trajets;
 	}
+	
+	public void addTrajet(Trajet trajet) {
+		this.trajets.add(trajet);
+	}
+	
+	
 
 	@Override
 	public String toString() {
