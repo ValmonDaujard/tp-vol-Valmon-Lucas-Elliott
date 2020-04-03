@@ -27,9 +27,8 @@ public class Reservation {
 	@JoinColumn(name="paiement")
 	private Paiement paiement;
 	
-//	@ManyToOne
-//	@JoinColumn(name="client")
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="client")
 	private Client client;
 	
 	@ManyToOne

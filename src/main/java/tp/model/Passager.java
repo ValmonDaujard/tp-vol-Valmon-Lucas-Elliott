@@ -35,9 +35,8 @@ public class Passager {
 	private Boolean handicap;
 	@OneToMany(mappedBy="passager")
 	private List<Reservation> reservations = new ArrayList<Reservation>();
-//	@ManyToOne
-//	@JoinColumn(name="client")
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="client")
 	private Client client;
 
 	

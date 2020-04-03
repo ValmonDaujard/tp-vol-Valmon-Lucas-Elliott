@@ -157,6 +157,35 @@ public class Test {
 //		System.out.println(roissy);
 //		System.out.println(paris);
 		
+		Societe sopraSteria = new Societe("Societe", "SOPRA",  "Numero de siret", "Numero de TVA", "SopraMail", "Tel Sopra", 20, "Avenue Pythagore", null, 33700,
+				"MERIGNAC", "FRANCE");
+
+		Particulier eric = new Particulier("Particulier", "SULTAN", "Eric", "e.sultan@ajc-ingenierie.fr", "0645104506", 86, "Avenue JFK", null, 33700,
+				"MERIGNAC", "FRANCE");
+		
+		sopraSteria = Application.getInstance().getSocieteDao().save(sopraSteria);
+		eric = Application.getInstance().getParticulierDao().save(eric);
+
+		System.out.println(sopraSteria);
+		System.out.println(eric);
+
+		Utilisateur userSopra = new Utilisateur("id SOPRA", "mdp");
+		Utilisateur userEric = new Utilisateur("id Eric", "MDP");
+
+		userSopra = Application.getInstance().getUtilisateurDao().save(userSopra);
+		userEric = Application.getInstance().getUtilisateurDao().save(userEric);
+		
+		sopraSteria.setUtilisateur(userSopra);
+		userSopra.setClient(sopraSteria);
+		eric.setUtilisateur(userEric);
+		userEric.setClient(eric);
+		
+		sopraSteria = Application.getInstance().getSocieteDao().save(sopraSteria);
+		userSopra = Application.getInstance().getUtilisateurDao().save(userSopra);
+		eric = Application.getInstance().getParticulierDao().save(eric);
+		userEric = Application.getInstance().getUtilisateurDao().save(userEric);
+		
+		
 		Paiement paiement1 = new Paiement();
 		paiement1.setMontant((float) 352);
 		paiement1.setType("carte banquaire");
@@ -187,7 +216,14 @@ public class Test {
 		
 		reservation1 = testReservation.save(reservation1);
 		
+		valmon.setClient(sopraSteria);
 		
+		reservation1.setClient(sopraSteria);
+		reservation1.setPassager(valmon);
+		
+		valmon = testPassager.save(valmon);
+		
+		reservation1 = testReservation.save(reservation1);
 		
 		
 	}

@@ -40,11 +40,9 @@ public class Client {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private Utilisateur utilisateur;
-	//@OneToMany(mappedBy = "client")
-	@Transient
+	@OneToMany(mappedBy = "client")
 	private List<Passager> passagers = new ArrayList<Passager>();
-	//@OneToMany(mappedBy = "client")
-	@Transient
+	@OneToMany(mappedBy = "client")
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 
 	public Client() {

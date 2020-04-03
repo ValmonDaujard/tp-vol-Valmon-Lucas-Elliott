@@ -11,7 +11,6 @@ import tp.model.persistence.jpa.PaiementDaoJpa;
 import tp.model.persistence.jpa.PassagerDaoJpa;
 import tp.model.persistence.jpa.ReservationDaoJpa;
 import tp.model.persistence.jpa.TrajetDaoJpa;
-
 import tp.model.persistence.IClientDao;
 import tp.model.persistence.IParticulierDao;
 import tp.model.persistence.ISocieteDao;
