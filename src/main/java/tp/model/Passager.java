@@ -2,25 +2,77 @@ package tp.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@Entity
 public class Passager {
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Version
+	private int version;
+	@Column(nullable = false)
 	private String nom;
 	private String prenom;
 	private Date dateDeNaissance;
 	private String nationalite;
 	private String sexe;
+	@Column(nullable = false)
 	private String numeroPasseport;
+	@Column(nullable = false)
 	private Date dateValiditePasseport;
 	private String typePieceIdentite;
 	private Boolean handicap;
-	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+	@OneToMany(mappedBy="passager")
+	private List<Reservation> reservations = new ArrayList<Reservation>();
+	@ManyToOne
+	@JoinColumn(name="client")
 	private Client client;
+
+	
+	
+	
+	public Passager() {
+	super();
+}
+
+
+	public Passager(String nom, String numeroPasseport, Date dateValiditePasseport) {
+		super();
+		this.nom = nom;
+		this.numeroPasseport = numeroPasseport;
+		this.dateValiditePasseport = dateValiditePasseport;
+	}
+
 
 	public Passager(String nom, String prenom) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 	}
+
+	
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 
 	public String getNom() {
 		return nom;
@@ -102,11 +154,11 @@ public class Passager {
 		this.handicap = handicap;
 	}
 
-	public ArrayList<Reservation> getReservations() {
+	public List<Reservation> getReservations() {
 		return reservations;
 	}
 
-	public void setReservations(ArrayList<Reservation> reservations) {
+	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 
