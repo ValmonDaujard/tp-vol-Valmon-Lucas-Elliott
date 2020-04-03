@@ -3,18 +3,25 @@ package tp;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import tp.model.persistence.IClientDao;
+import tp.model.persistence.IParticulierDao;
+import tp.model.persistence.ISocieteDao;
+import tp.model.persistence.IUtilisateurDao;
+import tp.model.persistence.jpa.ClientDaoJpa;
+import tp.model.persistence.jpa.ParticulierDaoJpa;
+import tp.model.persistence.jpa.SocieteDaoJpa;
+import tp.model.persistence.jpa.UtilisateurDaoJpa;
+
 public class Application {
 	private static Application instance = null;
 
 	private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("tp");
 
-//	private final IEvaluationDao evaluationDao =new EvaluationDaoJpa();
-//	private final IFiliereDao filiereDao = new FiliereDaoJpa();
-//	private final IFormateurDao formateurDao = new FormateurDaoJpa();
-//	private final IMatiereDao matiereDao = new MatiereDaoJpa();
-//	private final ISalleDao salleDao = new SalleDaoJpa();
-//	private final IStagiaireDao stagiaireDao = new StagiaireDaoJpa();
-//	private final IUEDao ueDao = new UEDaoJpa();
+	private final IClientDao clientDao = new ClientDaoJpa();
+	private final IUtilisateurDao utilisateurDao = new UtilisateurDaoJpa();
+	private final IParticulierDao particulierDao = new ParticulierDaoJpa();
+	private final ISocieteDao societeDao = new SocieteDaoJpa();
+
 
 	private Application() {
 	}
@@ -31,32 +38,21 @@ public class Application {
 		return emf;
 	}
 
-//	public IEvaluationDao getEvaluationDao() {
-//		return evaluationDao;
-//	}
-//
-//	public IFiliereDao getFiliereDao() {
-//		return filiereDao;
-//	}
-//
-//	public IFormateurDao getFormateurDao() {
-//		return formateurDao;
-//	}
-//
-//	public IMatiereDao getMatiereDao() {
-//		return matiereDao;
-//	}
-//
-//	public ISalleDao getSalleDao() {
-//		return salleDao;
-//	}
-//
-//	public IStagiaireDao getStagiaireDao() {
-//		return stagiaireDao;
-//	}
-//
-//	public IUEDao getUeDao() {
-//		return ueDao;
-//	}
+	public IClientDao getClientDao() {
+		return clientDao;
+	}
+
+	public IUtilisateurDao getUtilisateurDao() {
+		return utilisateurDao;
+	}
+
+	public IParticulierDao getParticulierDao() {
+		return particulierDao;
+	}
+
+	public ISocieteDao getSocieteDao() {
+		return societeDao;
+	}
+
 
 }

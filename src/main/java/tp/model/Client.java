@@ -1,10 +1,34 @@
 package tp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@Entity
+@Inheritance (strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="disc")
 public class Client {
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Version
+	private int version;
+	@Column(nullable = false)
 	private String type;
 	private String nom;
+	@Column(nullable = false)
 	private String mail;
 	private String telephone;
 	private int numeroAdresse;
@@ -13,15 +37,60 @@ public class Client {
 	private int codePostal;
 	private String ville;
 	private String pays;
+	@OneToOne
+	@JoinColumn(name = "user_id")
 	private Utilisateur utilisateur;
-	private ArrayList<Passager> passagers = new ArrayList<Passager>();
-	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
+	//@OneToMany(mappedBy = "client")
+	@Transient
+	private List<Passager> passagers = new ArrayList<Passager>();
+	//@OneToMany(mappedBy = "client")
+	@Transient
+	private List<Reservation> reservations = new ArrayList<Reservation>();
 
 	public Client() {
 		super();
 	}
 
-	public ArrayList<Passager> getPassagers() {
+	public Client(String type, String nom, String mail, String telephone, int numeroAdresse, String rue,
+			String complementAdresse, int codePostal, String ville, String pays) {
+		super();
+		this.type = type;
+		this.nom = nom;
+		this.mail = mail;
+		this.telephone = telephone;
+		this.numeroAdresse = numeroAdresse;
+		this.rue = rue;
+		this.complementAdresse = complementAdresse;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.pays = pays;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public int getVersion() {
+		return version;
+	}
+
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
+
+	public List<Passager> getPassagers() {
 		return passagers;
 	}
 
@@ -33,7 +102,7 @@ public class Client {
 		this.passagers.add(passager);
 	}
 
-	public ArrayList<Reservation> getReservations() {
+	public List<Reservation> getReservations() {
 		return reservations;
 	}
 
