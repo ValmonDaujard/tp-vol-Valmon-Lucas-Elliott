@@ -1,14 +1,42 @@
 package tp.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.persistence.Version;
+
+@Entity
 public class Trajet {
+	@Id
+	@GeneratedValue
+	private Long id;
+	@Version
+	private int version;
+	@OneToOne(mappedBy = "trajet")
 	private Reservation reservation;
-	private ArrayList<Vol> vols = new ArrayList<Vol>();
+	@Transient
+	private List<Vol> vols = new ArrayList<Vol>();
 
 	public Trajet() {
 		super();
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	public Reservation getReservation() {
 		return reservation;
@@ -18,11 +46,11 @@ public class Trajet {
 		this.reservation = reservation;
 	}
 
-	public ArrayList<Vol> getVols() {
+	public List<Vol> getVols() {
 		return vols;
 	}
 
-	public void setVols(ArrayList<Vol> vols) {
+	public void setVols(List<Vol> vols) {
 		this.vols = vols;
 	}
 
