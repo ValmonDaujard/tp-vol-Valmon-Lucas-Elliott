@@ -12,6 +12,15 @@ import tp.model.persistence.jpa.PassagerDaoJpa;
 import tp.model.persistence.jpa.ReservationDaoJpa;
 import tp.model.persistence.jpa.TrajetDaoJpa;
 
+import tp.model.persistence.IClientDao;
+import tp.model.persistence.IParticulierDao;
+import tp.model.persistence.ISocieteDao;
+import tp.model.persistence.IUtilisateurDao;
+import tp.model.persistence.jpa.ClientDaoJpa;
+import tp.model.persistence.jpa.ParticulierDaoJpa;
+import tp.model.persistence.jpa.SocieteDaoJpa;
+import tp.model.persistence.jpa.UtilisateurDaoJpa;
+
 public class Application {
 	private static Application instance = null;
 
@@ -21,6 +30,10 @@ public class Application {
 	private final IPaiementDao paiementDao = new PaiementDaoJpa();
 	private final IPassagerDao passagerDao = new PassagerDaoJpa();
 	private final ITrajetDao trajetDao = new TrajetDaoJpa();
+	private final IClientDao clientDao = new ClientDaoJpa();
+	private final IUtilisateurDao utilisateurDao = new UtilisateurDaoJpa();
+	private final IParticulierDao particulierDao = new ParticulierDaoJpa();
+	private final ISocieteDao societeDao = new SocieteDaoJpa();
 
 
 	private Application() {
@@ -41,6 +54,9 @@ public class Application {
 	public IReservationDao getReservationDao() {
 		return reservationDao;
 	}
+	public IClientDao getClientDao() {
+		return clientDao;
+	}
 
 	public IPaiementDao getPaiementDao() {
 		return paiementDao;
@@ -52,6 +68,19 @@ public class Application {
 
 	public ITrajetDao getTrajetDao() {
 		return trajetDao;
+	}
+
+
+	public IUtilisateurDao getUtilisateurDao() {
+		return utilisateurDao;
+	}
+
+	public IParticulierDao getParticulierDao() {
+		return particulierDao;
+	}
+
+	public ISocieteDao getSocieteDao() {
+		return societeDao;
 	}
 
 
