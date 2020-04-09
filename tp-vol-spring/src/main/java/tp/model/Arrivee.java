@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Arrivee {
@@ -19,7 +18,6 @@ public class Arrivee {
 	private Long id;
 	
 	@Column
-	@NotEmpty
 	private Date dateArrivee;
 	
 	@ManyToOne
@@ -35,7 +33,7 @@ public class Arrivee {
 	}
 	
 
-	public Arrivee(@NotEmpty Date dateArrivee) {
+	public Arrivee( Date dateArrivee) {
 		super();
 		this.dateArrivee = dateArrivee;
 	}

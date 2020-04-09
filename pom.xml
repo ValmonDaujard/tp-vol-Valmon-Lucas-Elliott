@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>sopra.formation.covid</groupId>
-	<artifactId>tp-vol-Valmon-Lucas-Elliott</artifactId>
+	<artifactId>tp-vol-JPA</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<name>Tp Vol</name>
