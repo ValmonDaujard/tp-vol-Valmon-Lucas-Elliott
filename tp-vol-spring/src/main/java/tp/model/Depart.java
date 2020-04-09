@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Depart {
@@ -23,7 +22,6 @@ public class Depart {
 	private Aeroport aeroport;
 	
 	@Column
-	@NotEmpty
 	private Date dateDepart;
 	
 	@OneToOne(mappedBy = "depart")
@@ -34,7 +32,7 @@ public class Depart {
 	}
 
 
-	public Depart(@NotEmpty Date dateDepart) {
+	public Depart( Date dateDepart) {
 		super();
 		this.dateDepart = dateDepart;
 	}

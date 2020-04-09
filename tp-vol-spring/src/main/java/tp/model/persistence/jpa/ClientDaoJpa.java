@@ -3,127 +3,48 @@ package tp.model.persistence.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import tp.Application;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import tp.model.Client;
 import tp.model.persistence.IClientDao;
 
+@Repository
+@Transactional
 public class ClientDaoJpa implements IClientDao {
+	
+	@PersistenceContext
+	private EntityManager em; // entityManagerFactory.createEntityManager()
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Client> findAll() {
-		List<Client> clients = null;
-
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			TypedQuery<Client> query = em.createQuery("from Client", Client.class);
-
-			clients = query.getResultList();
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
-		return clients;
+		
+		TypedQuery<Client> query = em.createQuery("from Client", Client.class);
+	
+		return query.getResultList();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Client find(Long id) {
-		Client client = null;
-
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			client = em.find(Client.class, id);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
-		return client;
+		
+		return em.find(Client.class, id);
 	}
 
 	@Override
 	public Client save(Client obj) {
-		Client client = null;
-
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			client = em.merge(obj);
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
-
-		return client;
+	
+		return em.merge(obj);
 	}
 
 	@Override
 	public void delete(Client obj) {
-		EntityManager em = null;
-		EntityTransaction tx = null;
-
-		try {
-			em = Application.getInstance().getEmf().createEntityManager();
-			tx = em.getTransaction();
-			tx.begin();
-
-			em.remove(em.merge(obj));
-
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			if (em != null) {
-				em.close();
-			}
-		}
+		
+		em.remove(em.merge(obj));
+	
 	}
-
 }
